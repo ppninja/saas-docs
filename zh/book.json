@@ -1,0 +1,9 @@
+{
+  "title": "PPJ API v1",
+  "description": "PPJ SaaS 服务 API 接口规范 第一版",
+  "author": "Yipeng Zhao<ypzhao@ppj.io>",
+  "plugins":["styles-sass", "ppjdocs@file:../plugins/gitbook-plugin-ppjdocs"],
+  "styles": {
+      "website": "../styles/website.scss"
+  }
+}

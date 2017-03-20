@@ -6,4 +6,4 @@ All rights reserved to [ppj.io](http://ppj.io).
 
 ## Contacts
 
-Questions and Consultants can be managed within QQ group: 459962155. 
+Questions and Consultants can be managed within QQ group: 459962155.

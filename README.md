@@ -13,9 +13,9 @@ gitbook install
 使用
 
 ```
-gitbook serve // serve locally
-gitbook build // build a book
+
+gitbook serve zh/   // serve locally
+gitbook build zh/   // build a book
 ```
 
 本地浏览 [http://localhost:4000/](http://localhost:4000)。
-
