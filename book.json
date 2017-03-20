@@ -1,0 +1,10 @@
+{
+  "root": "./docs",
+  "title": "PPJ API v1",
+  "description": "The first official version of PPJ saas service API",
+  "author": "Yipeng Zhao<ypzhao@ppj.io>",
+  "plugins":["styles-sass", "ppjdocs@file:./plugins/gitbook-plugin-ppjdocs"],
+  "styles": {
+      "website": "./styles/website.scss"
+  }
+}

@@ -1,0 +1,39 @@
+.markdown-section pre.command-line {
+  background-color: #444;
+  color: #63E463;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+
+  .command {
+    color: #fff;
+  }
+}
+
+// should move to plugins
+.markdown-section pre.response-header {
+  line-height: 1.4em;
+  padding: 10px;
+  overflow: auto;
+  color: #393939;
+  margin: 0 0 32px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 0;
+  border-radius: 3px;
+  border-bottom: 1px solid #CACACA;
+  background-color: #f4f4f4;
+}
+
+.markdown-section pre.response-body {
+  line-height: 1.4em;
+  padding: 10px;
+  overflow: auto;
+  color: #393939;
+  margin: 0 0 32px;
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 0;
+  border-radius: 0 0 3px 3px;
+  border-top-color: #ddd;
+  margin-top: -2px;
+}
