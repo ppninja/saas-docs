@@ -1,21 +1,21 @@
 ## 签名算法
 
-### 授权签名算法
-
-name|description|
+### 参数表
+参数名|描述
 ---|---
-APPID|PPJ AppID & AppSecret，从开发者后台获取
-APPSECRET|
-TIMESTAMP|Unix timestamp, 签名时用的时间戳，应与授权参数里面的一致
+APPID，APPSECRET|PPJ AppID & AppSecret，从开发者后台获取
+TIMESTAMP|Unix Timestamp，签名时用的时间戳，应与授权参数里面的一致
 HMAC|见 [Wiki](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
 sha256|哈希函数，见 [Wiki](https://en.wikipedia.org/wiki/SHA-2)
-_大多数语言已经集成了实现HMAC和sha256的函数_
+_大多数语言已经集成了实现 HMAC 和 sha256 的函数_
+
+### 签名步骤
 
 1. sign_parameters
 
-   除非在接口文档里特殊说明，所有的请求参数都__应该__参与到签名算法。
+   除非在接口文档里特殊说明，所有的请求参数都应该参与到签名算法。但 '\_' 开头的参数，如 '\_method'等，是保留参数，不参与签名步骤。
 
-   将所有签名参数的键按照ASCII升序排列，取URL键值对格式(key=value)，用'&amp;'相连，构造签名参数字符串。
+   将所有签名参数的键按照 ASCII 升序排列，取 URL 键值对格式（key=value），用 '&amp;' 相连，构造签名参数字符串。
 
    ```
    e.g. parameters:
@@ -75,26 +75,57 @@ _大多数语言已经集成了实现HMAC和sha256的函数_
    signature = ecebba8f5ca8965833c05797c1c4cff8f48c6346594bad5f2d86bcdef33a7495
    ```
 
-### 服务器验证请求算法
+## 示例
+```
+假设有客户
+APPID：shEgGCzL2QQi
+APPSECRET: kKdBnfSJNnBjex9gczp6P9g2
+配置的notify url: http://ppjclient.io/notify?agent=06875f8b
+```
+### 客户发送创建一个 Job 的示例
+```
+A file in current directory named 'test.pptx' has MD5 value: be92023d515907f5faaac32c3605d7ec.
+current Timestamp: 1490089532
 
-该签名仅用于服务器验证，使用场景见[这里](./notify_url.md#validation-request).
+sign_parameters = 'file_md5=be92023d515907f5faaac32c3605d7ec'
+sign_text = "POST\n/jobs\nfile_md5=be92023d515907f5faaac32c3605d7ec"
+sign_key = "ee17afa6d69f1221c07b1cd3edba30e3ae95331f663d04a606a3d53a5588bbb4"
+signature = "562ef9fee364f995dc9e0e5b1d57a855afd4e4bfed4fa414d4937dd1c7c5547f"
+```
 
-以下使用到的参数中，NONCE的值见验证请求，其他参数见[上一节](#授权签名算法).
+{%command%}
+curl -H "X-PPJ-Credential: shEgGCzL2QQi" \
+     -H "X-PPJ-Timestamp: 1490089532" \
+     -H "X-PPJ-Signature: 562ef9fee364f995dc9e0e5b1d57a855afd4e4bfed4fa414d4937dd1c7c5547f" \
+     -F "file_md5=be92023d515907f5faaac32c3605d7ec" \
+     -F "file_source=@test.pptx" \
+     http://api.ppj.io/jobs
+{%endcommand%}
 
-1. sign_key:
+```
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
 
-   ```
-   sign_key = HMAC(algorithm='sha256', data='APPSECRET', key='TIMESTAMP')
-   ```
-2. signature:
+{"token":"8v9iSKnj"}
+```
 
-   ```
-   signature = HMAC(algorithm='sha256', data='NONCE', key='sign_key')
+### PP 匠发送一个通知请求示例
+```
+token: '8v9iSKnj'
+current Timestamp: 1490092448
 
-   e.g.
-   NONCE = 7bzaglsx2y1nmujw
-   sign_key = 8f91cf9d54ccb163af07cc05210ecee355ce92c95c1dbd5558d0f5b3218fac1f
+sign_parameters = 'code=0&token=8v9iSKnj&type=completed'
+sign_text = "GET\n/notify\ncode=0&token=8v9iSKnj&type=completed"
+sign_key = "9998c39b50e75af156f3c3c05096759c2b1985314d41dccf85ac1d9f2fb63c1e"
+signature = '1159af6662969062edb3d1dc303dda77af5fcf1de2a43bcf7c28b1c1e409b4e9'
+```
 
-   signature = 988b7b1bdd05d10a0b21840561097f2dbbabeaf7e2bbe0dc960856a5fcdeb84e
+{% command %}
+curl -H "X-PPJ-Timestamp: 1490092448" \
+     -H "X-PPJ-Signature: 1159af6662969062edb3d1dc303dda77af5fcf1de2a43bcf7c28b1c1e409b4e9" \
+     http://ppjclient.io/notify?agent=06875f8b&token=8v9iSKnj&type=completed&code=0
+{% endcommand %}
 
-   ```
+```
+HTTP/1.1 200 OK
+```

@@ -1,25 +1,23 @@
 ## 回调地址
 
-将PPT转化成H5是一个长时间的异步过程，意味着当转化结束时，PP匠服务器会主动发送一个通知请求到客户服务器，来通知客户下载生成好的H5文件。因此客户需要在后台配置回调地址。
+将 PPT 转化成 H5 是一个长时间的异步过程。当转化结束时，PP 匠服务器会主动发送一个通知请求到客户服务器，来告知客户下载转化后的 H5 文件。因此客户需要在后台配置回调地址。
 
 ### 配置回调地址
 
 ![notify_url_setting_pane](static/notify_url_setting_pane.png)
 
-保存后需要点击’验证‘按钮来发送验证请求；只有验证通过的服务器才会在之后收到回调请求。
+保存后需要点击“验证”按钮来发送验证请求；只有验证通过的服务器才会在之后收到回调请求。
 
 ### 验证请求
-{% command %}curl https://your_server_notify_address?type=verify&amp;timestamp=XXXX&nonce=XXXXX&signature=XXXXX
+{% command %}curl https://your_server_notify_address?type=verify&amp;nonce=XXXXX
 {% endcommand %}
 
 #### 参数
 
 参数名|类型|值|描述
 ---|---|---|---
-type|string|verify|该请求类型，verify表示验证
-timestamp|Unix Timestamp||签名用时间戳
+type|string|'verify'|该请求类型，'verify' 表示验证
 nonce|string||随机字符串
-signature|string||验证签名，算法见[这里](./signature.md#服务器验证请求算法)
 
 #### 期待响应
 {% response header='200 OK' %}
@@ -30,14 +28,11 @@ Content-Type: 'application/json'
 }
 {% endresponse %}
 
-客户服务器返回一个json，包含请求发送的Nonce，则PP匠这边就会标记该服务器验证通过。
-
-PP匠同时提供一个签名Signature用来辅助客户验证发送服务器是否合法，但这__不是必要__的。
-
+客户服务器返回一个 json 格式值，包含请求发送的 nonce 值，则PP匠这边就会标记该服务器验证通过。
 
 ### 通知请求
 
-当一个Job完成，或者出错时，PP匠会主动发一个通知请求来告知客户。
+当一个 Job 完成，或者出错时，PP 匠会主动发一个通知请求来告知客户。
 
 {% command %} curl https://your_server_notify_address?type=XXX&token=XXX&code=XXXX
 {% endcommand %}
@@ -55,6 +50,20 @@ code|integer|[1, 2]|出错状态码, 1 表示PP匠服务器内部出错导致无
 {}
 {% endresponse %}
 
-一个通知请求需要在10s内回复，否则PP匠会认为通知发送失败，会在几秒后重复推送，直到成功收到200返回为止。
+一个通知请求需要在 10 秒内回复，否则 PP 匠会认为通知发送失败，会在几秒后重复推送，直到收到成功返回（Status: 200）为止。
 
 _请先响应通知，再处理您的业务逻辑_
+
+### 请求签名
+
+PP 匠通知客户的请求，也做了签名处理。客户服务器应__自行决定__是否需要验证 PP 匠发送的请求。
+
+与[授权验证](./overview.md#授权验证)稍有不同的是，参数只包含 Timestamp 和 Signature。 PP 匠服务器采用设置 headers 的方式发送请求。
+
+{% command %}
+curl -H 'X-PPJ-Timestamp: XXXXXXXXXX' \
+     -H 'X-PPJ-Signature: AUTH-TOKEN' \
+     https://your_server_notify_address?whatever
+{% endcommand %}
+
+示例见[签名算法](./signature.md#pp-匠发送一个通知请求示例)。

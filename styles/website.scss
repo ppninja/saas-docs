@@ -1,3 +1,10 @@
+// 通用样式修改
+.book .book-body .page-wrapper .page-inner section.normal pre, .book .book-body .page-wrapper .page-inner section.normal code{
+    font-size: 13px;
+}
+
+
+// should move to plugins
 .markdown-section pre.command-line {
   background-color: #444;
   color: #63E463;
@@ -10,7 +17,6 @@
   }
 }
 
-// should move to plugins
 .markdown-section pre.response-header {
   line-height: 1.4em;
   padding: 10px;
