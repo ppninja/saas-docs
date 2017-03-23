@@ -17,6 +17,8 @@ _大多数语言已经集成了实现 HMAC 和 sha256 的函数_
 
    将所有签名参数的键按照 ASCII 升序排列，取 URL 键值对格式（key=value），用 '&amp;' 相连，构造签名参数字符串。
 
+   若请求不含参数，取空字符串。 `sign_parameters=""`
+
    ```
    e.g. parameters:
    {
@@ -94,12 +96,13 @@ signature = "562ef9fee364f995dc9e0e5b1d57a855afd4e4bfed4fa414d4937dd1c7c5547f"
 ```
 
 {%command%}
-curl -H "X-PPJ-Credential: shEgGCzL2QQi" \
+curl -H "Accept: application/vnd.ppj.v1+json" \
+     -H "X-PPJ-Credential: shEgGCzL2QQi" \
      -H "X-PPJ-Timestamp: 1490089532" \
      -H "X-PPJ-Signature: 562ef9fee364f995dc9e0e5b1d57a855afd4e4bfed4fa414d4937dd1c7c5547f" \
      -F "file_md5=be92023d515907f5faaac32c3605d7ec" \
      -F "file_source=@test.pptx" \
-     http://api.ppj.io/jobs
+     http://ppj.io/jobs
 {%endcommand%}
 
 ```
@@ -112,17 +115,19 @@ Content-Type: application/json; charset=utf-8
 ### PP 匠发送一个通知请求示例
 ```
 token: '8v9iSKnj'
-current Timestamp: 1490092448
+type: 'completed'
+code: '0'
+current Timestamp: 1490255398
 
-sign_parameters = 'code=0&token=8v9iSKnj&type=completed'
-sign_text = "GET\n/notify\ncode=0&token=8v9iSKnj&type=completed"
-sign_key = "9998c39b50e75af156f3c3c05096759c2b1985314d41dccf85ac1d9f2fb63c1e"
-signature = '1159af6662969062edb3d1dc303dda77af5fcf1de2a43bcf7c28b1c1e409b4e9'
+sign_parameters = 'agent=06875f8b&code=0&token=8v9iSKnj&type=completed'
+sign_text = "GET\n/notify\nagent=06875f8b&code=0&token=8v9iSKnj&type=completed"
+sign_key = "e2eef1820e50b7ad16b208ff00b6b7cf7bb679e3de3d377fcfaf1e898e746dc6"
+signature = '9b566f493c25afa7b57b6e2289f2382c32ab2393bdf0b0367ba77bb53dce36db'
 ```
 
 {% command %}
-curl -H "X-PPJ-Timestamp: 1490092448" \
-     -H "X-PPJ-Signature: 1159af6662969062edb3d1dc303dda77af5fcf1de2a43bcf7c28b1c1e409b4e9" \
+curl -H "X-PPJ-Timestamp: 1490255398" \
+     -H "X-PPJ-Signature: 9b566f493c25afa7b57b6e2289f2382c32ab2393bdf0b0367ba77bb53dce36db" \
      http://ppjclient.io/notify?agent=06875f8b&token=8v9iSKnj&type=completed&code=0
 {% endcommand %}
 

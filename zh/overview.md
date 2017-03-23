@@ -8,7 +8,7 @@
 
 ### API 请求根目录
 
-`https://api.ppj.io/`
+`http://ppj.io/`
 
 ### 通用规范
 
@@ -51,7 +51,7 @@ DELETE|	表示删除某项资源
 对于发送 http 请求时，设置 Verb 有困难的客户端，可以通过在请求的参数列表增加 `_method=[Verb.]` 来取代。
 
 {% command %}
-curl http://api.ppj.io/whatever?_method=GET
+curl http://ppj.io/whatever?_method=GET
 {% endcommand %}
 
 ### 授权验证
@@ -78,11 +78,11 @@ Signature|String|验证用签名, 点击查看[签名算法](./signature.md)
 curl -H 'X-PPJ-Credential: YOUR-APPID' \
      -H 'X-PPJ-Timestamp: XXXXXXXXXXX' \
      -H 'X-PPJ-Signature: AUTH-TOKEN' \
-     https://api.ppj.io/whatever
+     http://ppj.io/whatever
 {% endcommand %}
 
 2. 通过设置 http 请求的参数
-{% command %}curl 'https://api.ppj.io/whatever?_credential=XXXX&_timestamp=XXXXXX&_signature=XXXXXX'
+{% command %}curl 'http://ppj.io/whatever?_credential=XXXX&_timestamp=XXXXXX&_signature=XXXXXX'
 {% endcommand %}
 
 __注意：__ 所有以“\_”开头的参数，如 \_method，\_credential，\_timestamp和 \_signature，本身是不参与计算签名的；示例见[签名算法示例](./signature.md#示例)。
