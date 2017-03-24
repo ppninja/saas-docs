@@ -1,0 +1,1 @@
+gitbook build zh/ && mv zh/_book docs && scp -r docs root@ppj-server-test:/root/ppninja/public/enterprise && rm -rf docs

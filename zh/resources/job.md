@@ -105,14 +105,14 @@ __错误响应__
 GET /jobs   (alias. /job/list)
 
 {
-  'status': 'completed',
+  'state': 'completed',
   'start_date': '2017-03-16T02:20:39+00:00'
 }
 ```
 #### 参数
 参数名|类型|是否必须？|描述
 ---|---|---|---
-status|string|可选|PPT状态，可填写的值见[状态表](#状态表)
+state|string|可选|PPT状态，可填写的值见[状态表](#状态表)
 start_date|DateTime|可选|查询起始时间
 end_date|DateTime|可选|查询终止时间
 

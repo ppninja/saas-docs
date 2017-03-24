@@ -24,12 +24,12 @@ _大多数语言已经集成了实现 HMAC 和 sha256 的函数_
    {
      'start_date': '2017-03-16T02:20:39+00:00',
      'end_date': '2017-03-17T02:20:39+00:00',
-     'status': 'completed'
+     'state': 'completed'
    }
    ```
    ```
    result:
-   end_date=2017-03-17T02:20:39+00:00&start_date=2017-03-16T02:20:39+00:00&status=completed
+   end_date=2017-03-17T02:20:39+00:00&start_date=2017-03-16T02:20:39+00:00&state=completed
    ```  
 
 2. sign_text
@@ -43,14 +43,14 @@ _大多数语言已经集成了实现 HMAC 和 sha256 的函数_
 
    GET /jobs/list
    {
-     'status': 'completed'
+     'state': 'completed'
    }
 
    sign_text:
 
    GET
    /jobs/list
-   status=completed
+   state=completed
 
    ```
 
@@ -58,23 +58,12 @@ _大多数语言已经集成了实现 HMAC 和 sha256 的函数_
 
    ```
    sign_key = HMAC(algorithm='sha256', data='APPSECRET', key='TIMESTAMP')
-
-   e.g.
-   TIMESTAMP = 1489820220
-   APPSECRET = kKdBnfSJNnBjex9gczp6P9g2
-
-   sign_key = 8f91cf9d54ccb163af07cc05210ecee355ce92c95c1dbd5558d0f5b3218fac1f
    ```
 
 4. signature
 
    ```
    signature = HMAC(algorithm='sha256', data='sign_text', key='sign_key')
-
-   e.g.
-   for sign_text and sign_key from step 2 and 3
-
-   signature = ecebba8f5ca8965833c05797c1c4cff8f48c6346594bad5f2d86bcdef33a7495
    ```
 
 ## 示例
