@@ -11,6 +11,8 @@ toc_footers:
 includes:
   - api/jobs
   - callback
+  - security
+  - thanks
 
 search: true
 ---
