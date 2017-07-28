@@ -2,7 +2,7 @@
 
 我们使用**Job**来指代一次PPT转H5请求。
 
-## Job的生命周期
+## Life Cycle || Job的生命周期
 
 一个Job可能经历以下状态变化。
 
@@ -18,7 +18,7 @@
 有关 <strong>通知客户服务器</strong> 部分请查看后续章节。
 </aside>
 
-## 获取所有Job
+## List || 获取所有Job
 
 ```shell
 curl -i -H "X-PPJ-Credential: ppj_is_great" \
@@ -61,7 +61,7 @@ end_date | DateTime | 「可选」早于该时间（不含）创建的Job
 - `count`：满足条件的Job的数量；
 - `tokens`：满足条件的Job的标识组成的数组。
 
-## 创建Job
+## Create || 创建Job
 
 ```shell
 curl -i -H "X-PPJ-Credential: ppj_is_great" https://ppj.io/api/jobs -XPOST \
@@ -135,7 +135,7 @@ file_md5 | String | 「可选」源文件的MD5值，提供该值时将校验文
 
 如果上传文件的MD5与参数中提供的MD5不符，或者其他业务逻辑上的错误，返回`400 Bad Request`。
 
-## 查询特定 Job
+## Show || 查询特定 Job
 
 ```shell
 curl -i -H "X-PPJ-Credential: ppj_is_great" https://ppj.io/api/jobs/kuSzcH5AwaDY
@@ -190,7 +190,7 @@ token | String | Job 标识
 
 如果`Token`对应的Job存在，则返回与「创建Job」相同的对象；否则返回`404 Not Found`。
 
-## 下载转换完毕后的H5文件
+## Download || 下载转换完毕后的H5文件
 
 ```shell
 curl -H "X-PPJ-Credential: ppj_is_great"
