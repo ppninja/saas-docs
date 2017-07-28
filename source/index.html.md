@@ -12,7 +12,6 @@ includes:
   - api/jobs
   - callback
   - security
-  - thanks
 
 search: true
 ---
