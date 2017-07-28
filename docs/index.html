@@ -1,0 +1,761 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API 文档 - PP匠</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="简介">简介</a>
+          </li>
+          <li>
+            <a href="#request" class="toc-h1 toc-link" data-title="请求">请求</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#endpoint" class="toc-h2 toc-link" data-title="请求"> 根目录</a>
+                  </li>
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="请求">权限验证</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#response" class="toc-h1 toc-link" data-title="响应">响应</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#200-ok" class="toc-h2 toc-link" data-title="响应">200 OK</a>
+                  </li>
+                  <li>
+                    <a href="#400-bad-request" class="toc-h2 toc-link" data-title="响应">400 Bad Request</a>
+                  </li>
+                  <li>
+                    <a href="#401-unauthorized" class="toc-h2 toc-link" data-title="响应">401 Unauthorized</a>
+                  </li>
+                  <li>
+                    <a href="#403-forbidden" class="toc-h2 toc-link" data-title="响应">403 Forbidden</a>
+                  </li>
+                  <li>
+                    <a href="#404-not-found" class="toc-h2 toc-link" data-title="响应">404 Not Found</a>
+                  </li>
+                  <li>
+                    <a href="#500-internal-server-error" class="toc-h2 toc-link" data-title="响应">500 Internal Server Error</a>
+                  </li>
+                  <li>
+                    <a href="#503-service-unavailable" class="toc-h2 toc-link" data-title="响应">503 Service Unavailable</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#jobs" class="toc-h1 toc-link" data-title="Jobs">Jobs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#life-cycle" class="toc-h2 toc-link" data-title="Jobs">Job的生命周期</a>
+                  </li>
+                  <li>
+                    <a href="#list" class="toc-h2 toc-link" data-title="Jobs">获取所有Job</a>
+                  </li>
+                  <li>
+                    <a href="#create" class="toc-h2 toc-link" data-title="Jobs">创建Job</a>
+                  </li>
+                  <li>
+                    <a href="#show" class="toc-h2 toc-link" data-title="Jobs">查询特定 Job</a>
+                  </li>
+                  <li>
+                    <a href="#download" class="toc-h2 toc-link" data-title="Jobs">下载转换完毕后的H5文件</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#callback" class="toc-h1 toc-link" data-title="回调">回调</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#config-notify-url" class="toc-h2 toc-link" data-title="回调">配置回调地址</a>
+                  </li>
+                  <li>
+                    <a href="#notify" class="toc-h2 toc-link" data-title="回调">通知请求</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#security" class="toc-h1 toc-link" data-title="安全措施">安全措施</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#https-only" class="toc-h2 toc-link" data-title="安全措施">使用https</a>
+                  </li>
+                  <li>
+                    <a href="#ip-whitelist" class="toc-h2 toc-link" data-title="安全措施">设置IP白名单</a>
+                  </li>
+              </ul>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://ppj.io/apply/company'>申请 API 权限</a></li>
+            <li><a href='https://ppj.io/profile/api'>设置开发信息</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>简介</h1>
+<p>欢迎使用PP匠SaaS服务API！你可以使用我们的API，将PPT上传到PP匠网站，转化为H5网页，并通过接口下载到本地。</p>
+
+<p>如你在使用过程中遇到问题，请加QQ群（459962155）或微信（GockGe）咨询。</p>
+<h1 id='request'>请求</h1><h2 id='endpoint'> 根目录</h2>
+<p>请用HTTPS发起所有请求到以下根目录：</p>
+
+<p><code>https://ppj.io/api/</code></p>
+
+<p>如果你的API类型为<code>测试</code>，请使用以下根目录：</p>
+
+<p><code>https://sandbox.ppj.io/api/</code></p>
+<h2 id='authentication'>权限验证</h2>
+<blockquote>
+<p>你可以使用以下代码验证权限：</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: your_access_key"</span> https://ppj.io/api/jobs
+</code></pre>
+<blockquote>
+<p>或者添加请求参数：</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -i <span class="s1">'https://ppj.io/api/jobs?_credential=your_access_key'</span>
+</code></pre>
+<blockquote>
+<p>请将 <code>your_access_key</code> 替换为你自己的<code>Access Key</code>。</p>
+</blockquote>
+
+<p>PP匠使用<code>Access Key</code>验证所有的API请求，你可以在PP匠网站的<a href="https://ppj.io/profile/api">开发信息</a>页面查看。</p>
+
+<p>我们要求所有请求增加一个以<code>X-PPJ-Credential</code>为键<code>Access Key</code>为值的请求头（Request Header），形式如下：</p>
+
+<p><code>X-PPJ-Credential: your_access_key</code></p>
+
+<p>如果你的网络请求库不方便设置请求头，也可以使用以<code>_credential</code>为键<code>Access Key</code>为值的请求参数（Query String）的方式，形式如下：</p>
+
+<p><code>_credential=your_access_key</code></p>
+
+<aside class="notice">
+请将 <code>your_access_key</code> 替换为你自己的<code>Access Key</code>。
+</aside>
+<h1 id='response'>响应</h1>
+<ul>
+<li>未经特别说明，所有API以<code>application/json</code>格式响应请求；</li>
+<li>时间戳以<code>ISO 8601</code>格式返回，如<code>2017-03-16T02:20:39+00:00</code>。通常也会同时返回一个精确到秒的Unix时间戳。</li>
+</ul>
+<h2 id='200-ok'>200 OK</h2><pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017年第二季度财报"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果请求正确完成，则以<code>200</code>的状态码响应，并返回一个JSON对象，一般格式如右侧所示：</p>
+<h2 id='400-bad-request'>400 Bad Request</h2><pre class="highlight http tab-http"><code><span class="err">Status: 400 Bad Request
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"上传文件的MD5与参数中提供的MD5不符。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果请求存在逻辑错误，如参数验证不通过等，则以<code>400</code>的状态码响应，并返回一个JSON对象用以说明错误原因，一般格式如右侧所示：</p>
+<h2 id='401-unauthorized'>401 Unauthorized</h2><pre class="highlight http tab-http"><code><span class="err">Status: 401 Unauthorized
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access Key无效，请查看开发信息页面或文档。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UnauthorizedError"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果提供的<code>Access Key</code>不正确或者以错误的方式添加请求头，则以<code>401</code>的状态码响应，并返回一个JSON对象用以说明错误原因。</p>
+<h2 id='403-forbidden'>403 Forbidden</h2><pre class="highlight http tab-http"><code><span class="err">Status: 403 Forbidden
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"客户端IP不在白名单中，请在后台设置。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PermissionError"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果使用白名单之外的IP发起请求，或者请求的参数签名不正确，则以<code>403</code>的状态码响应，并返回一个JSON对象用以说明错误原因。</p>
+<h2 id='404-not-found'>404 Not Found</h2><pre class="highlight http tab-http"><code><span class="err">Status: 404 Not Found
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"您所请求的资源不存在。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NotFoundError"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果请求的资源不存在，则以<code>404</code>的状态码响应，并返回一个JSON对象用以说明错误原因。</p>
+<h2 id='500-internal-server-error'>500 Internal Server Error</h2><pre class="highlight http tab-http"><code><span class="err">Status: 500 Internal Server Error
+Content-Type: text/html
+</span></code></pre>
+<p>如果服务器出现异常，则以<code>500</code>的状态码响应。</p>
+<h2 id='503-service-unavailable'>503 Service Unavailable</h2><pre class="highlight http tab-http"><code><span class="err">Status: 503 Service Unavailable
+Content-Type: text/html
+</span></code></pre>
+<p>如果我们正在更新服务，可能出现短暂的服务不可用的情况，这时会以<code>503</code>的状态码响应，请稍后重试。</p>
+<h1 id='jobs'>Jobs</h1>
+<p>我们使用<strong>Job</strong>来指代一次PPT转H5请求。</p>
+<h2 id='life-cycle'>Job的生命周期</h2>
+<p>一个Job可能经历以下状态变化。</p>
+
+<p><img src="images/jobs_state_machine.png" alt="Job状态机" /></p>
+
+<ul>
+<li><code>uploading</code>，<code>converting</code>，<code>disting</code>：表示服务器正在执行转换</li>
+<li><code>notifying</code>：正在通知客户服务器，此时可通过API下载生成的H5文件</li>
+<li><code>completed</code>：转换并通知完成，此时可通过API下载生成的H5文件</li>
+<li><code>deleted</code>：所有资源已被移除，此时<strong>无法</strong>通过API下载生成的H5文件</li>
+<li><code>halted</code>：转换过程出现错误，已终止</li>
+</ul>
+
+<aside class="notice">
+有关 <strong>通知客户服务器</strong> 部分请查看后续章节。
+</aside>
+<h2 id='list'>获取所有Job</h2><pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: ppj_is_great"</span> <span class="se">\</span>
+     <span class="s1">'https://ppj.io/api/jobs?start_date=2017-07-31'</span>
+</code></pre>
+<blockquote>
+<p>以上命令将返回如下格式的数据：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"fZoYvkua34zqYny8"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET https://ppj.io/api/jobs</code></p>
+<h3 id=''>参数表</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_date</td>
+<td>DateTime</td>
+<td>「可选」晚于该时间（含）创建的Job</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>DateTime</td>
+<td>「可选」早于该时间（不含）创建的Job</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+以上参数中的 <code>DateTime</code> 类型请使用<code>ISO 8601</code>格式的字符串表示，如<code>2017-07-30T02:20:39+08:00</code>。如果服务端无法成功将字符串转换成时间，则该参数将忽略。
+</aside>
+<h3 id='-2'>响应</h3>
+<p>返回满足条件的所有Job。</p>
+
+<ul>
+<li><code>count</code>：满足条件的Job的数量；</li>
+<li><code>tokens</code>：满足条件的Job的标识组成的数组。</li>
+</ul>
+<h2 id='create'>创建Job</h2><pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: ppj_is_great"</span> https://ppj.io/api/jobs -XPOST <span class="se">\</span>
+     -F <span class="s1">'file_source=@demo.pptx'</span> <span class="se">\</span>
+     -F <span class="s1">'file_md5=5951595bace948c6fd5e0f415b16a16e'</span>
+</code></pre>
+<blockquote>
+<p>请根据实际情况替换以上所有参数。</p>
+
+<p>以上命令将返回如下格式的数据：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kuSzcH5AwaDY"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.pptx"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1826642</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-24T08:36:03.872Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at_in_ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500885363</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>如果出现业务逻辑上的错误：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 400 Bad Request
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"上传文件的MD5与参数中提供的MD5不符。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>POST https://ppj.io/api/jobs</code></p>
+<h3 id='-3'>参数表</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file_source</td>
+<td>File</td>
+<td>文件流</td>
+</tr>
+<tr>
+<td>file_md5</td>
+<td>String</td>
+<td>「可选」源文件的MD5值，提供该值时将校验文件完整性</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+请以 <code>multipart/form-data</code> 对请求参数进行编码。
+</aside>
+<h3 id='-4'>响应</h3>
+<p>如果创建成功，返回该Job的信息，各字段说明如下：</p>
+
+<ul>
+<li><code>token</code>：标识，用于后续的查询；</li>
+<li><code>name</code>：名称；</li>
+<li><code>state</code>：状态，见「Job的生命周期」；</li>
+<li><code>source_filename</code>：源文件名；</li>
+<li><code>source_filesize</code>：源文件大小，单位为字节；</li>
+<li><code>total_pages</code>：源文件总页数；</li>
+<li><code>last_error</code>：转换过程中的错误原因；</li>
+<li><code>created_at</code>：创建时间，<code>ISO 8601</code>格式；</li>
+<li><code>created_at_in_ts</code>：创建时间，精确到秒的Unix时间戳。</li>
+</ul>
+
+<p>如果上传文件的MD5与参数中提供的MD5不符，或者其他业务逻辑上的错误，返回<code>400 Bad Request</code>。</p>
+<h2 id='show'>查询特定 Job</h2><pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: ppj_is_great"</span> https://ppj.io/api/jobs/kuSzcH5AwaDY
+</code></pre>
+<blockquote>
+<p>请将<code>kuSzcH5AwaDY</code>替换为具体的Job标识。</p>
+
+<p>以上命令将返回如下格式的数据：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kuSzcH5AwaDY"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.pptx"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1826642</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-24T08:36:03.872Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at_in_ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500885363</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>如果Token对应的Job不存在：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 404 Not Found
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"您所请求的资源不存在。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NotFoundError"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET https://ppj.io/api/jobs/{token}</code></p>
+<h3 id='-5'>参数表</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>Job 标识</td>
+</tr>
+</tbody></table>
+<h3 id='-6'>响应</h3>
+<p>如果<code>Token</code>对应的Job存在，则返回与「创建Job」相同的对象；否则返回<code>404 Not Found</code>。</p>
+<h2 id='download'>下载转换完毕后的H5文件</h2><pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"X-PPJ-Credential: ppj_is_great"</span>
+     https://ppj.io/api/jobs/kuSzcH5AwaDY/download
+     -o archive.zip
+</code></pre>
+<blockquote>
+<p>请将<code>kuSzcH5AwaDY</code>替换为具体的Job标识。</p>
+
+<p>如果Job可供下载，返回二进制流：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: 'application/zip'
+Content-Disposition: attachment; filename="kuSzcH5AwaDY.zip"
+Content-Transfer-Encoding: binary
+
+{binary data}
+</span></code></pre>
+<blockquote>
+<p>如果Job没有转换完成：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 400 Bad Request
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"项目还没有转换完成。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET https://ppj.io/api/jobs/{token}/download</code></p>
+<h3 id='-7'>参数表</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>Job 标识</td>
+</tr>
+</tbody></table>
+<h3 id='-8'>响应</h3>
+<p>如果Job已经转换完成可供下载（<code>notifying</code>或<code>completed</code>状态），则返回<code>zip</code>格式的二进制流；否则返回<code>400 Bad Request</code>。</p>
+
+<p>如果<code>Token</code>对应的Job不存在，返回<code>404 Not Found</code>。</p>
+<h1 id='callback'>回调</h1>
+<p>将PPT转化成H5通常需要1-3分钟，如果文件较大或较复杂，转换时间可能更长。当转化完成或出现异常时，PP匠服务器会主动发送一个通知请求到客户服务器，以告知客户下载转化后的H5文件或转换失败。</p>
+
+<aside class="notice">
+如果你不想开发一个接口用于处理我们的回调请求，你也可以通过轮询「查询特定 Job」接口查询状态，并根据状态做出相应的处理。
+</aside>
+
+<aside class="warning">
+轮询接口的间隔时间建议在10秒以上。
+</aside>
+<h2 id='config-notify-url'>配置回调地址</h2><pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"请求中的nonce值"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>你可以使用以下命令测试你的回调地址：</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -i https://your-server.com/hook -d <span class="s1">'type=verify&amp;nonce=a-random-string'</span>
+</code></pre>
+<p>请在<a href="https://ppj.io/profile/api">开发信息</a>页面的「调用配置 - 回调地址」部分填写你的回调地址。我们会以<code>POST</code>请求的方式请求该地址，并带上以下参数：</p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>固定为<code>verify</code>，表示请求类型为验证</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>String</td>
+<td>随机字符串</td>
+</tr>
+</tbody></table>
+
+<p>请以右侧的格式响应该请求。</p>
+<h2 id='notify'>通知请求</h2>
+<blockquote>
+<p>我们将发送类似下面的请求：</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -i https://your-server.com/hook -d <span class="s1">'type=complete&amp;token=kuSzcH5AwaDY'</span>
+</code></pre>
+<blockquote>
+<p>如果你的回调地址成功收到我们的请求，请返回状态码<code>200</code>。</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200
+</span></code></pre>
+<p>当一个Job转换成功或者出错时，PP匠会主动发一个通知请求来告知客户。</p>
+<h3 id=''>参数表</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>Job 的标识</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Job 处理结果。成功时为<code>complete</code>，失败时为<code>error</code></td>
+</tr>
+<tr>
+<td>code</td>
+<td>Integer</td>
+<td>处理失败时提供，表示出错的状态码。<code>1</code> 表示PP匠服务器内部出错导致无法转化, <code>2</code> 表示上传的PPT源文件有问题，导致无法转化</td>
+</tr>
+</tbody></table>
+<h3 id='-2'>期待响应</h3>
+<p>如果你的回调地址成功收到我们的请求，请返回状态码<code>200</code>。</p>
+<h3 id='-3'>错误重试</h3>
+<p>一个通知请求需要在10秒内回复，如果超时或者返回的状态码非<code>200</code>，我们将认为该请求失败，并在间隔一定时间后重新发送请求。我们会以以下公式计算间隔时间（单位为秒），且最多尝试25次。</p>
+
+<p><code>(retry_count ** 4) + 15 + (rand(30) * (retry_count + 1))</code></p>
+<h1 id='security'>安全措施</h1><h2 id='https-only'>使用https</h2>
+<p>请使用<code>https</code>请求我们的API，尝试使用<code>http</code>将得到<code>400</code>错误。此外，我们建议您在客户端验证CA证书有效性。</p>
+<h2 id='ip-whitelist'>设置IP白名单</h2><pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: your_access_key"</span> https://ppj.io/api/jobs
+</code></pre><pre class="highlight http tab-http"><code><span class="err">Status: 403 Forbidden
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"客户端IP不在白名单中，请在后台设置。"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PermissionError"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>如果你希望只有特定机器发起的请求才被接受，则可以在<a href="https://ppj.io/profile/api">开发信息</a>页面的「调用配置 - IP 白名单」部分设置。我们支持以下格式：</p>
+
+<p><strong>允许指定IP</strong></p>
+
+<p><code>220.181.57.217</code></p>
+
+<p><strong>允许指定IP段</strong></p>
+
+<p><code>220.181.57.0/24</code></p>
+
+<p><strong>允许多个IP或IP段</strong></p>
+
+<p><code>220.181.57.217;220.181.57.0/24</code></p>
+
+<p>使用 IP 白名单范围外的 IP 发送请求将返回<code>403 Forbidden</code>错误。</p>
+
+<!-- ## Signature || 验证请求参数签名
+
+如果你希望进一步加强请求的安全性，则可以启用「验证请求参数签名」。 -->
+
+        <h1></h1>
+        <p>感谢您的耐心阅读 ❤️</p>
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
