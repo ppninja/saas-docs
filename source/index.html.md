@@ -28,6 +28,10 @@ search: true
 
 `https://ppj.io/api/`
 
+如果你的API类型为`测试`，请使用以下根目录：
+
+`https://sandbox.ppj.io/api/`
+
 ## Authentication || 权限验证
 
 > 你可以使用以下代码验证权限：
@@ -36,7 +40,7 @@ search: true
 curl -i -H "X-PPJ-Credential: your_access_key" https://ppj.io/api/jobs
 ```
 
-> 或者添加请求参数
+> 或者添加请求参数：
 
 ```shell
 curl -i 'https://ppj.io/api/jobs?_credential=your_access_key'
@@ -50,7 +54,7 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 `X-PPJ-Credential: your_access_key`
 
-如果你的网络请求库不方便设置请求头，也可以使用以`_credential`为键`Access Key`为值的请求参数（Query String)的方式，形式如下：
+如果你的网络请求库不方便设置请求头，也可以使用以`_credential`为键`Access Key`为值的请求参数（Query String）的方式，形式如下：
 
 `_credential=your_access_key`
 
@@ -61,12 +65,14 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 # Response || 响应
 
 - 未经特别说明，所有API以`application/json`格式响应请求；
-- 时间戳以`ISO 8601`格式返回，如`2017-03-16T02:20:39+00:00`。通常也会同时返回一个精确到秒的unix时间戳。
+- 时间戳以`ISO 8601`格式返回，如`2017-03-16T02:20:39+00:00`。通常也会同时返回一个精确到秒的Unix时间戳。
 
 ## 200 OK
 
-> Status: 200 OK<br/>Content-Type: application/json
-
+```http
+Status: 200 OK
+Content-Type: application/json
+```
 ```json
 {
   "token": "token",
@@ -79,7 +85,10 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 ## 400 Bad Request
 
-> Status: 400 Bad Request<br/>Content-Type: application/json
+```http
+Status: 400 Bad Request
+Content-Type: application/json
+```
 
 ```json
 {
@@ -92,7 +101,10 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 ## 401 Unauthorized
 
-> Status: 401 Unauthorized<br/>Content-Type: application/json
+```http
+Status: 401 Unauthorized
+Content-Type: application/json
+```
 
 ```json
 {
@@ -105,7 +117,10 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 ## 403 Forbidden
 
-> Status: 403 Forbidden<br/>Content-Type: application/json
+```http
+Status: 403 Forbidden
+Content-Type: application/json
+```
 
 ```json
 {
@@ -118,7 +133,10 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 ## 404 Not Found
 
-> Status: 404 Not Found<br/>Content-Type: application/json
+```http
+Status: 404 Not Found
+Content-Type: application/json
+```
 
 ```json
 {
@@ -131,12 +149,18 @@ PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开
 
 ## 500 Internal Server Error
 
-> Status: 500 Internal Server Error<br/>Content-Type: text/html
+```http
+Status: 500 Internal Server Error
+Content-Type: text/html
+```
 
 如果服务器出现异常，则以`500`的状态码响应。
 
 ## 503 Service Unavailable
 
-> Status: 503 Service Unavailable<br/>Content-Type: text/html
+```http
+Status: 503 Service Unavailable
+Content-Type: text/html
+```
 
 如果我们正在更新服务，可能出现短暂的服务不可用的情况，这时会以`503`的状态码响应，请稍后重试。
