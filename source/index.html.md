@@ -1,239 +1,142 @@
 ---
-title: API Reference
+title: API 文档 - PP匠
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - shell: cURL
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://ppj.io/apply/company'>申请 API 权限</a>
+  - <a href='https://ppj.io/profile/api'>设置开发信息</a>
 
 includes:
-  - errors
+  - api/jobs
 
 search: true
 ---
 
-# Introduction
+# Introduction || 简介
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+欢迎使用PP匠SaaS服务API！你可以使用我们的API，将PPT上传到PP匠网站，转化为H5网页，并通过接口下载到本地。
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+如你在使用过程中遇到问题，请加QQ群（459962155）或微信（GockGe）咨询。
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Request || 请求
 
-# Authentication
+## Endpoint ||  根目录
 
-> To authorize, use this code:
+请用HTTPS发起所有请求到以下根目录：
 
-```ruby
-require 'kittn'
+`https://ppj.io/api/`
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+## Authentication || 权限验证
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> 你可以使用以下代码验证权限：
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -i -H "X-PPJ-Credential: your_access_key" https://ppj.io/api/jobs
 ```
 
-```javascript
-const kittn = require('kittn');
+> 或者添加请求参数
 
-let api = kittn.authorize('meowmeowmeow');
+```shell
+curl -i 'https://ppj.io/api/jobs?_credential=your_access_key'
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> 请将 `your_access_key` 替换为你自己的`Access Key`。
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+PP匠使用`Access Key`验证所有的API请求，你可以在PP匠网站的[开发信息](https://ppj.io/profile/api)页面查看。
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+我们要求所有请求增加一个以`X-PPJ-Credential`为键`Access Key`为值的请求头（Request Header），形式如下：
 
-`Authorization: meowmeowmeow`
+`X-PPJ-Credential: your_access_key`
+
+如果你的网络请求库不方便设置请求头，也可以使用以`_credential`为键`Access Key`为值的请求参数（Query String)的方式，形式如下：
+
+`_credential=your_access_key`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+请将 <code>your_access_key</code> 替换为你自己的<code>Access Key</code>。
 </aside>
 
-# Kittens
+# Response || 响应
 
-## Get All Kittens
+- 未经特别说明，所有API以`application/json`格式响应请求；
+- 时间戳以`ISO 8601`格式返回，如`2017-03-16T02:20:39+00:00`。通常也会同时返回一个精确到秒的unix时间戳。
 
-```ruby
-require 'kittn'
+## 200 OK
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Status: 200 OK<br/>Content-Type: application/json
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "token": "token",
+  "name": "2017年第二季度财报",
+  "state": "completed"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+如果请求正确完成，则以`200`的状态码响应，并返回一个JSON对象，一般格式如右侧所示：
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+## 400 Bad Request
 
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> Status: 400 Bad Request<br/>Content-Type: application/json
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "message": "上传文件的MD5与参数中提供的MD5不符。",
+  "type": "Error"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+如果请求存在逻辑错误，如参数验证不通过等，则以`400`的状态码响应，并返回一个JSON对象用以说明错误原因，一般格式如右侧所示：
 
-### HTTP Request
+## 401 Unauthorized
 
-`DELETE http://example.com/kittens/<ID>`
+> Status: 401 Unauthorized<br/>Content-Type: application/json
 
-### URL Parameters
+```json
+{
+  "message": "Access Key无效，请查看开发信息页面或文档。",
+  "type": "UnauthorizedError"
+}
+```
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+如果提供的`Access Key`不正确或者以错误的方式添加请求头，则以`401`的状态码响应，并返回一个JSON对象用以说明错误原因。
 
+## 403 Forbidden
+
+> Status: 403 Forbidden<br/>Content-Type: application/json
+
+```json
+{
+  "message": "客户端IP不在白名单中，请在后台设置。",
+  "type": "PermissionError"
+}
+```
+
+如果使用白名单之外的IP发起请求，或者请求的参数签名不正确，则以`403`的状态码响应，并返回一个JSON对象用以说明错误原因。
+
+## 404 Not Found
+
+> Status: 404 Not Found<br/>Content-Type: application/json
+
+```json
+{
+  "message": "您所请求的资源不存在。",
+  "type": "NotFoundError"
+}
+```
+
+如果请求的资源不存在，则以`404`的状态码响应，并返回一个JSON对象用以说明错误原因。
+
+## 500 Internal Server Error
+
+> Status: 500 Internal Server Error<br/>Content-Type: text/html
+
+如果服务器出现异常，则以`500`的状态码响应。
+
+## 503 Service Unavailable
+
+> Status: 503 Service Unavailable<br/>Content-Type: text/html
+
+如果我们正在更新服务，可能出现短暂的服务不可用的情况，这时会以`503`的状态码响应，请稍后重试。
