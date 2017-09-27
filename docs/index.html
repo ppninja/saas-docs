@@ -279,6 +279,14 @@
               </ul>
           </li>
           <li>
+            <a href="#quotas" class="toc-h1 toc-link" data-title="Quotas">Quotas</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list" class="toc-h2 toc-link" data-title="Quotas">查询可用额度</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#callback" class="toc-h1 toc-link" data-title="回调">回调</a>
               <ul class="toc-list-h2">
                   <li>
@@ -633,6 +641,33 @@ Content-Type: application/json
 <p>如果Job已经转换完成可供下载（<code>notifying</code>或<code>completed</code>状态），则返回<code>zip</code>格式的二进制流；否则返回<code>400 Bad Request</code>。</p>
 
 <p>如果<code>Token</code>对应的Job不存在，返回<code>404 Not Found</code>。</p>
+<h1 id='quotas'>Quotas</h1><h2 id='list'>查询可用额度</h2><pre class="highlight shell tab-shell"><code>curl -i -H <span class="s2">"X-PPJ-Credential: ppj_is_great"</span> <span class="se">\</span>
+     <span class="s1">'https://ppj.io/api/quotas'</span>
+</code></pre>
+<blockquote>
+<p>以上命令将返回如下格式的数据：</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
+Content-Type: application/json
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"permanents"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"permanents_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET https://ppj.io/api/quotas</code></p>
+<h3 id=''>响应</h3>
+<p>返回该账号下的额度汇总信息。</p>
+
+<ul>
+<li><code>summary.permanents</code>：项目总额度；</li>
+<li><code>summary.permanents_left</code>：项目剩余额度。</li>
+</ul>
+
+<aside class="notice">
+如果以上两项值为`null`，则表示无限额度。
+</aside>
 <h1 id='callback'>回调</h1>
 <p>将PPT转化成H5通常需要1-3分钟，如果文件较大或较复杂，转换时间可能更长。当转化完成或出现异常时，PP匠服务器会主动发送一个通知请求到客户服务器，以告知客户下载转化后的H5文件或转换失败。</p>
 

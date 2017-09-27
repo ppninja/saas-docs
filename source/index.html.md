@@ -10,6 +10,7 @@ toc_footers:
 
 includes:
   - api/jobs
+  - api/quotas
   - callback
   - security
 
