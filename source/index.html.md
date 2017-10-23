@@ -13,6 +13,7 @@ includes:
   - api/quotas
   - callback
   - security
+  - demo
 
 search: true
 ---
