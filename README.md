@@ -1,4 +1,8 @@
-[Git pages](https://ppninja.github.io/saas-docs/#introduction)
+[GitHub Pages](https://ppninja.github.io/saas-docs/#introduction)
+
+```shell
+bundle exec middleman build --build-dir=docs/
+```
 
 ---------
 

@@ -684,15 +684,15 @@ Content-Type: application/json
 <h2 id='config-notify-url'>配置回调地址</h2><pre class="highlight http tab-http"><code><span class="err">Status: 200 OK
 Content-Type: application/json
 </span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"请求中的nonce值"</span><span class="w">
+  </span><span class="s2">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"请求参数中的nonce值"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>你可以使用以下命令测试你的回调地址：</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -i https://your-server.com/hook -d <span class="s1">'type=verify&amp;nonce=a-random-string'</span>
+<pre class="highlight shell tab-shell"><code>curl -i <span class="s1">'https://your-server.com/hook?type=verify&amp;nonce=a-random-string'</span>
 </code></pre>
-<p>请在<a href="https://ppj.io/profile/api">开发信息</a>页面的「调用配置 - 回调地址」部分填写你的回调地址。我们会以<code>POST</code>请求的方式请求该地址，并带上以下参数：</p>
+<p>请在<a href="https://ppj.io/profile/api">开发信息</a>页面的「调用配置 - 回调地址」部分填写你的回调地址。我们会以<code>GET</code>请求的方式请求该地址，并带上以下参数：</p>
 
 <table><thead>
 <tr>
@@ -718,7 +718,7 @@ Content-Type: application/json
 <blockquote>
 <p>我们将发送类似下面的请求：</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -i https://your-server.com/hook -d <span class="s1">'type=complete&amp;token=kuSzcH5AwaDY'</span>
+<pre class="highlight shell tab-shell"><code>curl -i <span class="s1">'https://your-server.com/hook?type=complete&amp;token=kuSzcH5AwaDY'</span>
 </code></pre>
 <blockquote>
 <p>如果你的回调地址成功收到我们的请求，请返回状态码<code>200</code>。</p>

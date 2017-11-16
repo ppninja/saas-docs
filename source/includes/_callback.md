@@ -19,17 +19,17 @@ Content-Type: application/json
 
 ```json
 {
-  "nonce": "请求中的nonce值"
+  "nonce": "请求参数中的nonce值"
 }
 ```
 
 > 你可以使用以下命令测试你的回调地址：
 
 ```shell
-curl -i https://your-server.com/hook -d 'type=verify&nonce=a-random-string'
+curl -i 'https://your-server.com/hook?type=verify&nonce=a-random-string'
 ```
 
-请在[开发信息](https://ppj.io/profile/api)页面的「调用配置 - 回调地址」部分填写你的回调地址。我们会以`POST`请求的方式请求该地址，并带上以下参数：
+请在[开发信息](https://ppj.io/profile/api)页面的「调用配置 - 回调地址」部分填写你的回调地址。我们会以`GET`请求的方式请求该地址，并带上以下参数：
 
 参数 | 类型 | 说明
 --------- | ------- | -----------
@@ -43,7 +43,7 @@ nonce | String | 随机字符串
 > 我们将发送类似下面的请求：
 
 ```shell
-curl -i https://your-server.com/hook -d 'type=complete&token=kuSzcH5AwaDY'
+curl -i 'https://your-server.com/hook?type=complete&token=kuSzcH5AwaDY'
 ```
 
 > 如果你的回调地址成功收到我们的请求，请返回状态码`200`。
